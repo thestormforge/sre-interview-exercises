@@ -18,7 +18,7 @@ spec:
       - name: scaler
         image: ghcr.io/thestormforge/sre-interview-exercises-licenses
         command: ["/usr/local/bin/licenses"]
-        args: ["-source-file", "/data/tenants.json"]
+        args: ["-source_file", "/data/tenants.json"]
         ports:
         - name: http
           hostPort: 8080
