@@ -13,7 +13,7 @@ snapshot:
 dockers:
 - dockerfile: shared/service/licenses/Dockerfile
   image_templates:
-  - "ghcr.io/charandas/{{.ProjectName}}-licenses:{{.Version}}"
+  - "ghcr.io/thestormforge/{{.ProjectName}}-licenses:{{.Version}}"
   build_flag_templates:
   - "--label=org.opencontainers.image.created={{.Date}}"
   - "--label=org.opencontainers.image.title={{.ProjectName}}"

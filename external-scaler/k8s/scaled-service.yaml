@@ -2,16 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: scaled-service
-  namespace: default
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: scaled-service
+       app.kubernetes.io/name: scaled-service
   template:
     metadata:
       labels:
-        app: scaled-service
+         app.kubernetes.io/name: scaled-service
     spec:
       containers:
       - name: scaled-service
@@ -23,11 +22,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: echo-service
-  namespace: default
+  name: scaled-service
 spec:
   selector:
-    app: scaled-service
+     app.kubernetes.io/name: scaled-service
   ports:
   - name: http-port
     protocol: TCP
