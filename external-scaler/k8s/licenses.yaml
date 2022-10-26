@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: licenses
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: licenses
+      app.kubernetes.io/name: licenses
+  template:
+    metadata:
+      labels:
+        name: licenses
+        app.kubernetes.io/name: licenses
+    spec:
+      name: tenants-data
+      containers:
+      - name: scaler
+        image: ghcr.io/thestormforge/sre-interview-exercises-licenses
+        command: ["/usr/local/bin/licenses"]
+        args: ["-source-file", "/data/tenants.json"]
+        ports:
+        - name: http
+          hostPort: 8080
+          containerPort: 8080
+        volumeMounts:
+        - name: tenants-data
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /ping
+          initialDelaySeconds: 10
+          periodSeconds: 60
+        imagePullPolicy: Always
+      volumes:
+      - configMap:
+          name: tenants-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: licenses
+  labels:
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: http
+selector:
+  app.kubernetes.io/name: licenses
