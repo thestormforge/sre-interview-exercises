@@ -21,8 +21,13 @@ For your convenience, a kubernetes manifest directory has already been created. 
     2. The scaler should respond appropriately to license service having any hiccups. That is, it should wait on making any scaling decisions if license service is in an error state. (You can simulate such troubles by scaling license service to 0.)
     3. When a license gets reinstated, the number of replicas for a tenant should be back to the default of 2.
 
-## Implementation, Deployment and Building
+## Implementation and Building
 
-1. Once you are done writing the code for scalar (there is plenty of help [here](https://keda.sh/docs/2.8/concepts/external-scalers/)), you can either modify the goreleaser config and push your docker image to a public GHCR under your GitHub, or use the local option in kind documented [here](https://kind.sigs.k8s.io/docs/user/local-registry/). The gRPC protos provided by Keda have been pre-built using `protoc` for your convenience so you can go straight to writing against their contract.
-    1. [grpcurl](https://github.com/fullstorydev/grpcurl) might be helpful for validating your scaler but don't let that discourage you from writing tests in your go package.
-2. Get the k8s manifests written and running for your scaler from under the [k8s](./k8s) folder before you introduce Keda `ScaledObject` CRDs for the scaled-service.
+1. The gRPC protos provided by Keda have been pre-built using `protoc` for your convenience[here](./pkg/externalscaler) so you can go straight to writing against their contract.
+    1. [grpcurl](https://github.com/fullstorydev/grpcurl) might be helpful for validating your scaler but don't let that discourage you from writing tests that run as part of `go test`.
+2. Once you are done writing the code for the scalar (there is plenty of help [here](https://keda.sh/docs/2.8/concepts/external-scalers/)), you can either modify the goreleaser config and push your docker image to a public GHCR under your GitHub, or use the local option in kind documented [here](https://kind.sigs.k8s.io/docs/user/local-registry/).
+
+
+## Deployment
+
+Get the k8s manifests written and running for your scaler from under the [k8s](./k8s) folder before you introduce Keda `ScaledObject` CRDs for the scaled-service.
