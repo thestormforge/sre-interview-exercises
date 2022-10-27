@@ -14,5 +14,4 @@ configMapGenerator:
 
 images:
 - name: ghcr.io/thestormforge/sre-interview-exercises-licenses
-  newName: ghcr.io/charandas/sre-interview-exercises-licenses
-  newTag: 0.0.1
+  newTag: 0.0.2
