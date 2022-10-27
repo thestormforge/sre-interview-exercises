@@ -16,4 +16,13 @@ For your convenience, a kubernetes manifest directory has already been created. 
     kubectl create namespace tenant-b || kubectl -n tenant-b apply -f ./k8s/tenant-specific/scaled-service.yaml
     kubectl create namespace tenant-c || kubectl -n tenant-c apply -f ./k8s/tenant-specific/scaled-service.yaml
     ```
-3. Now, if you paid attention to the sample data, `tenant-b` doesn't have a working license. Their `scaled-service` should be scaled down to 0 replicas until an action is taken by the support team to reinstate their license. You need to write some kind of automation that utilizes the existing license service to acheive this. If you have some ideas, go ahead! If you find yourself in a need of hint or two, let us know.
+3. Now, if you paid attention to the sample data, `tenant-b` doesn't have a working license. Their `scaled-service` should be scaled down to 0 replicas until an action is taken by the support team to reinstate their license. You need to write a keda external scaler that utilizes the existing license service to acheive this. A few requirements:
+    1. The scaler should react dynamically to a change in licenses. For now, our JSON based license service isn't very dynamic (it requires a configmap change and restart), , but still, your scaler should be reactive to changing data and scale tenants up and down as needed.
+    2. The scaler should respond appropriately to license service having any hiccups. That is, it should wait on making any scaling decisions if license service is in an error state. (You can simulate such troubles by scaling license service to 0.)
+    3. When a license gets reinstated, the number of replicas for a tenant should be back to the default of 2.
+
+## Implementation, Deployment and Building
+
+1. Once you are done writing the code for scalar (there is plenty of help [here](https://keda.sh/docs/2.8/concepts/external-scalers/)), you can either modify the goreleaser config and push your docker image to a public GHCR under your GitHub, or use the local option in kind documented [here](https://kind.sigs.k8s.io/docs/user/local-registry/). The gRPC protos provided by Keda have been pre-built using `protoc` for your convenience so you can go straight to writing against their contract.
+    1. [grpcurl](https://github.com/fullstorydev/grpcurl) might be helpful for validating your scaler but don't let that discourage you from writing tests in your go package.
+2. Get the k8s manifests written and running for your scaler from under the [k8s](./k8s) folder before you introduce Keda `ScaledObject` CRDs for the scaled-service.
