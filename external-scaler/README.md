@@ -11,6 +11,7 @@ For your convenience, a kubernetes manifest directory has already been created. 
     ```shell
     kustomize build k8s/licenses | k apply -f -
 
+    # namespace names below correspond to tenant IDs in ./k8s/licenses/sample-data.json
     kubectl create namespace tenant-a || kubectl -n tenant-a apply -f ./k8s/tenant-specific/scaled-service.yaml
     kubectl create namespace tenant-b || kubectl -n tenant-b apply -f ./k8s/tenant-specific/scaled-service.yaml
     kubectl create namespace tenant-c || kubectl -n tenant-c apply -f ./k8s/tenant-specific/scaled-service.yaml
