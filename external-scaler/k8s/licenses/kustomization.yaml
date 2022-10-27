@@ -6,7 +6,6 @@ generatorOptions:
 
 resources:
 - licenses.yaml
-- scaled-service.yaml
 
 configMapGenerator:
 - name: tenants-data
