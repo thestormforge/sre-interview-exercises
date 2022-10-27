@@ -17,7 +17,7 @@ For your convenience, a kubernetes manifest directory has already been created. 
     kubectl create namespace tenant-c || kubectl -n tenant-c apply -f ./k8s/tenant-specific/scaled-service.yaml
     ```
 3. Now, if you paid attention to the sample data, `tenant-b` doesn't have a working license. Their `scaled-service` should be scaled down to 0 replicas until an action is taken by the support team to reinstate their license. You need to write a keda external scaler that utilizes the existing license service to acheive this. A few requirements:
-    1. The scaler should react dynamically to a change in licenses. For now, our JSON based license service isn't very dynamic (it requires a configmap change and restart), , but still, your scaler should be reactive to changing data and scale tenants up and down as needed.
+    1. The scaler should react dynamically to a change in licenses. For now, our JSON based license service isn't very dynamic (it requires a configmap change and restart), but still, your scaler should be reactive to changing data and scale tenants up and down as needed.
     2. The scaler should respond appropriately to license service having any hiccups. That is, it should wait on making any scaling decisions if license service is in an error state. (You can simulate such troubles by scaling license service to 0.)
     3. When a license gets reinstated, the number of replicas for a tenant should be back to the default of 2.
 
