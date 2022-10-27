@@ -23,7 +23,7 @@ For your convenience, a kubernetes manifest directory has already been created. 
 
 ## Implementation and Building
 
-1. The gRPC protos provided by Keda have been pre-built using `protoc` for your convenience[here](./pkg/externalscaler) so you can go straight to writing against their contract.
+1. The gRPC protos provided by Keda have been pre-built using `protoc` for your convenience [here](./pkg/externalscaler) so you can go straight to writing against their contract.
     1. [grpcurl](https://github.com/fullstorydev/grpcurl) might be helpful for validating your scaler but don't let that discourage you from writing tests that run as part of `go test`.
 2. Once you are done writing the code for the scalar (there is plenty of help [here](https://keda.sh/docs/2.8/concepts/external-scalers/)), you can either modify the goreleaser config and push your docker image to a public GHCR under your GitHub, or use the local option in kind documented [here](https://kind.sigs.k8s.io/docs/user/local-registry/).
 
