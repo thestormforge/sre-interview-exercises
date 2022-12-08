@@ -19,11 +19,7 @@ The objective of this exercise is to use KEDA to check an API endpoint and based
     ```
 3. If you look at the sample data in `k8s/licenses/sample-data.json`, `tenant-b` has a license that is expired. Their `scaled-service` should be scaled down to 0 replicas until an action is taken by the support team to reinstate their license.
 
-    This is where you come in, you need to write a KEDA external scaler that checks the license API and will scale the tenant service up or down.
-
-    __Requirements;__
-
-    The scaler should react to any change in the license services. If the license is valid, we scale to 2. If it is invalid, we scale to 0.
+    This is where you come in, you need to write a KEDA external scaler that checks the license API and will scale the tenant service up or down. The scaler should react to any change in the license services. If the license is valid, we scale to 2. If it is invalid, we scale to 0.
 
 ## Implementation and Building
 
