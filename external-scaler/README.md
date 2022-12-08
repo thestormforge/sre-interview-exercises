@@ -25,10 +25,10 @@ The objective of this exercise is to use KEDA to check an API endpoint and based
 
 1. KEDA uses [gRPC](https://grpc.io/docs/what-is-grpc/introduction/), but the protos provided by KEDA have already been built using `protoc` for your convenience [here](./pkg/externalscaler) so you can go straight to writing against their contract.
     * [grpcurl](https://github.com/fullstorydev/grpcurl) might be helpful for validating your scaler.
-2. KEDA doesn't have a plugin for what we need to do, so we need to write an [external scaler](https://keda.sh/docs/2.8/concepts/external-scalers/). If you use the affirmentioned link, most of the work has been done for you.
+2. KEDA doesn't have a plugin for what we need to do, so we need to write an [external scaler](https://keda.sh/docs/2.8/concepts/external-scalers/) in golang. If you use the aforementioned link, most of the work has been done for you.
 3. Once you have an external scaler ready, you will need to build the image. You can either modify the goreleaser config and push your Docker image to a public GHCR under your GitHub, or use the local option in kind documented [here](https://kind.sigs.k8s.io/docs/user/local-registry/).
 4. The final step is to deploy to your cluster. The keda docs have an example of the manifest for their ScaledObject CRD.
 
 ## Testing
 
-Since the sample-data is static, if you make changes, you will have to restart the license service. Taking the license service down can also be a good test in how your scaler reacts to outages.
+Since the sample-data is static, if you make changes, you will have to restart the license service. Taking the license service down can also be a good test scenario for how your scaler reacts to outages.
