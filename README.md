@@ -1,3 +1,5 @@
 # sre-interview-exercises
 
-This repo is just starting. If you would like to take our one and only exercise, it's located under [external-scaler](./external-scaler/).
+This repository contains technical challenges which are meant to be fun and informative, but mirror challenges we have to tackle day-to-day.
+
+* [external-scaler](./external-scaler/).

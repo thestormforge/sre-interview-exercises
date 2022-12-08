@@ -1,5 +1,4 @@
 [
     {"id": "tenant-a", "name": "Tenant A", "services": ["scaled-service"], "period_start": "2022-01-27T00:00:00Z", "period_end": "2023-10-27T00:00:00Z"},
-    {"id": "tenant-b", "name": "Tenant B", "services": ["scaled-service"], "period_start": "2022-01-27T00:00:00Z", "period_end": "2022-09-27T00:00:00Z"},
-    {"id": "tenant-c", "name": "Tenant C", "services": ["scaled-service"], "period_start": "2022-01-27T00:00:00Z", "period_end": "2022-12-27T00:00:00Z" }
+    {"id": "tenant-b", "name": "Tenant B", "services": ["scaled-service"], "period_start": "2022-01-27T00:00:00Z", "period_end": "2022-09-27T00:00:00Z"}
 ]
