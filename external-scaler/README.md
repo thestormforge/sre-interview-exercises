@@ -1,12 +1,12 @@
 # external-scaler exercise
 
-We, at StormForge, are fans of autoscaling in Kubernetes. HPA already offers a basic set of capabilities which when combined with things like [KEDA](https://keda.sh/) allow for many more possibilities.
+At StormForge, we are fans of autoscaling in Kubernetes. The horizontal pod scaler in Kubernetes offers a basic set of capabilities, but when combined with a tool like [KEDA](https://keda.sh/) we can achieve more control and precision when scaling workloads.
 
-In this exercise, you will help us use our internal license service which keeps track of our customers subscription to scale up/down the backend services corresponding to their tenant.
+The objective of this exercise is to use KEDA to check an API endpoint and based on the returned value, make a decision to scale up or down another backend service. For your convenience, a set of Kubernetes manifests representing the services have already been created. 
 
-For your convenience, a Kubernetes manifest directory has already been created. We are using `kustomize` to tie it all together. Let's start with deploying what we have got so far:
+To start, follow these steps to deploy the services;
 
-1. Install [kind](https://kind.sigs.k8s.io/) on your system, if you don't already have a working Kubernetes cluster.
+1. Install a Kubernetes cluster. [kind](https://kind.sigs.k8s.io/) or [minikube](https://minikube.sigs.k8s.io/docs/start/) or [Docker Desktop](https://docs.docker.com/desktop/kubernetes/) will definitely make this easy.
 2. With `kubectl` and `kustomize` installed atop, perform the following:
     ```shell
     kustomize build k8s/licenses | kubectl apply -f -
